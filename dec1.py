@@ -1,1 +1,1 @@
-
+print("Ludde e söt")
