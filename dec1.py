@@ -5,28 +5,31 @@ import matplotlib.pyplot as plt
 import fileinput
 import itertools
 
-# PART I
+
 depths = []
 with fileinput.input(files=('input.txt')) as f:
     for line in f:
         depths.append(int(line))
 
+# PART I
 copy = []
 
-for i in range(0,len(depths)):
-    if i == 0:
-        copy.append(None)
-    elif depths[i] > depths[i-1]:
-        copy.append(True)
-    else:
-        copy.append(False)
 
-increase = copy.count(True)
-#print(increase)
+def increasing(inc_list, depths_list):
+    for i in range(0, len(depths_list)):
+        if i == 0:
+            inc_list.append(None)
+        elif depths_list[i] > depths_list[i - 1]:
+            inc_list.append(True)
+        else:
+            inc_list.append(False)
+    return inc_list
+
+
+increase = increasing(copy, depths).count(True)
+print("How many measurements are larger than the previous measurement? ", increase)
 
 # PART II
-df = pd.DataFrame(depths, columns = ['depths'])
-#print(max(range(0,len(depths))))
 sums = []
 
 for i in range(0,len(depths)-2):
@@ -34,13 +37,6 @@ for i in range(0,len(depths)-2):
 
 copy2 = []
 
-for i in range(0,len(sums)):
-    if i == 0:
-        copy2.append(None)
-    elif sums[i] > sums[i-1]:
-        copy2.append(True)
-    else:
-        copy2.append(False)
+increase2 = increasing(copy2, sums).count(True)
+print("How many sums are larger than the previous sum? ", increase2)
 
-increase2 = copy2.count(True)
-print(increase2)
