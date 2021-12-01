@@ -12,10 +12,10 @@ with fileinput.input(files=('input.txt')) as f:
         depths.append(int(line))
 
 # PART I
-copy = []
 
 
-def increasing(inc_list, depths_list):
+def increasing(depths_list):
+    inc_list = []
     for i in range(0, len(depths_list)):
         if i == 0:
             inc_list.append(None)
@@ -26,7 +26,7 @@ def increasing(inc_list, depths_list):
     return inc_list
 
 
-increase = increasing(copy, depths).count(True)
+increase = increasing(depths).count(True)
 print("How many measurements are larger than the previous measurement? ", increase)
 
 # PART II
@@ -35,8 +35,6 @@ sums = []
 for i in range(0,len(depths)-2):
     sums.append(sum(depths[i:i+3]))
 
-copy2 = []
-
-increase2 = increasing(copy2, sums).count(True)
+increase2 = increasing(sums).count(True)
 print("How many sums are larger than the previous sum? ", increase2)
 
