@@ -38,3 +38,5 @@ for i in range(0,len(depths)-2):
 increase2 = increasing(sums).count(True)
 print("How many sums are larger than the previous sum? ", increase2)
 
+#data = pd.read_csv('input.txt',names=['depth'])
+#print(data.head())
