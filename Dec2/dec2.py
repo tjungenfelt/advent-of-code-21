@@ -6,7 +6,7 @@ import fileinput
 import itertools
 
 
-data = pd.read_csv('input2.txt', sep=' ', names=['direction','units'])
+data = pd.read_csv('input2.txt', sep=' ', names=['direction', 'units'])
 dlist = data.values.tolist()
 
 # PART I
