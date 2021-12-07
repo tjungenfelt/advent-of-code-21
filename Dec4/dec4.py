@@ -26,7 +26,7 @@ for i in range(0, len(df_list), 5):
         list.append(df_list[j])
     bingo.append(list)
 
-help = [[[False]*len(bingo[0][0]) for elem in bingo[0]] for row in bingo]
+marked = [[[False]*len(bingo[0][0]) for elem in bingo[0]] for row in bingo]
 
 
 def sum_column(board, col):
@@ -55,14 +55,14 @@ for elem in nbrs:
             for j in range(0, len(bingo[0])):  # for every row in board
                 if elem in bingo[i][j]:
                     idx = bingo[i][j].index(elem)
-                    help[i][j][idx] = True
-                if sum(help[i][j]) == 5:
-                    print('Bingo! Score: ', elem * sum_bingo(bingo[i], help[i]))
+                    marked[i][j][idx] = True
+                if sum(marked[i][j]) == 5:
+                    print('Bingo! Score: ', elem * sum_bingo(bingo[i], marked[i]))
                     find = True
                     break
             for k in range(0, len(bingo[0])): # for evert col in board
-                if sum_column(help[i], k) == 5:
-                    print('Bingo! Score: ', elem * sum_bingo(bingo[i], help[i]))
+                if sum_column(marked[i], k) == 5:
+                    print('Bingo! Score: ', elem * sum_bingo(bingo[i], marked[i]))
                     break
     else:
         break
@@ -70,30 +70,29 @@ for elem in nbrs:
 
 # PART II
 boards = [i for i in range(0, len(bingo))]
-help2 = [False for i in range(0, len(bingo))]
-help = [[[False]*len(bingo[0][0]) for elem in bingo[0]] for row in bingo]
+marked2 = [False for i in range(0, len(bingo))]
+marked = [[[False]*len(bingo[0][0]) for elem in bingo[0]] for row in bingo]
 find = False
-
 
 for elem in nbrs:
     if not find:
         for i in range(0, len(bingo)):  # for every board
-            if sum(help2) < len(bingo):
+            if sum(marked2) < len(bingo):
                 for j in range(0, len(bingo[0])):  # for every row in board
                     if elem in bingo[i][j]:
                         idx = bingo[i][j].index(elem)
-                        help[i][j][idx] = True
-                    if sum(help[i][j]) == 5:
-                        help2[i] = True
+                        marked[i][j][idx] = True
+                    if sum(marked[i][j]) == 5:
+                        marked2[i] = True
                         if len(boards) > 1 and i in boards:
                             boards.remove(i)
                 for k in range(0, len(bingo[0])):  # for evert col in board
-                    if sum_column(help[i], k) == 5:
-                        help2[i] = True
+                    if sum_column(marked[i], k) == 5:
+                        marked2[i] = True
                         if len(boards) > 1 and i in boards:
                             boards.remove(i)
             else:
-                print('Bingo! Score: ', elem * sum_bingo(bingo[boards[0]], help[boards[0]]))
+                print('Bingo! Score: ', elem * sum_bingo(bingo[boards[0]], marked[boards[0]]))
                 find = True
                 break
     else:
