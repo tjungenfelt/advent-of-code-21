@@ -30,7 +30,7 @@ for i in range(0, len(coord)):
                 else:
                     d[(k, j)] += 1
 
-print(len([val for val in d.values() if val > 1]))
+print('P1. Points were at least two lines overlap: ', len([val for val in d.values() if val > 1]))
 
 
 # PART II
@@ -49,13 +49,22 @@ for i in range(0, len(coord)):
                 else:
                     d2[(k, j)] += 1
     else:
-        r1 = list(range(x[0], x[1]))
-        r2 = list(range(y[0], y[1]))
-        print(r1)
-        #for i in range(0,len(r1)):
-        #    if (r2[i], r1[i]) not in d2:
-        #         d2[(r2[i], r1[i])] = 1
-        #    else:
-        #        d2[(r2[i], r1[i])] += 1
+        if x[0] > x[1]:
+            r1 = list(range(x[0], x[1]-1, -1))
+            if y[0] > y[1]:
+                r2 = list(range(y[0], y[1]-1, -1))
+            else:
+                r2 = list(range(y[0], y[1]+1))
+        elif y[0] > y[1]:
+            r2 = list(range(y[0], y[1]-1, -1))
+            r1 = list(range(x[0], x[1]+1))
+        else:
+            r1 = list(range(x[0], x[1]+1))
+            r2 = list(range(y[0], y[1]+1))
+        for p in range(0, len(r1)):
+            if (r2[p], r1[p]) not in d2:
+                 d2[(r2[p], r1[p])] = 1
+            else:
+                d2[(r2[p], r1[p])] += 1
 
-#print(len([val for val in d2.values() if val > 1]))
+print('P2. Points were at least two lines overlap: ', len([val for val in d2.values() if val > 1]))
