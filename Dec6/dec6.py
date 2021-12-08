@@ -5,18 +5,55 @@ with open('input.txt') as f:
     initial_state = f.readline()
     initial_state = initial_state.split(',')
     initial_state = [int(x) for x in initial_state]
+    
+# PART I
 
-copy = []
-copy.append((initial_state))
+d = dict()
+for x in range(0, 9):
+    d[x] = 0
 
-for i in range(0, 80):
-    copy.append((copy[i]))
-    for j in range(0,len(copy[i+1])):
-        if copy[i+1][j] != 0:
-            copy[i+1][j] -= 1
-        else:
-            copy[i+1].append(8)
-            copy[i+1][j] = 6
+for i in range(0, len(initial_state)):
+    if initial_state[i] not in d:
+        d[initial_state[i]] = 1
+    else:
+        d[initial_state[i]] += 1
 
-print(len(copy[i]))
+part1 = d.copy()
+part2 = d.copy()
+
+
+def count_fish(d_fish, days):
+    for day in range(0, days):
+        z = d_fish[0]
+        for x in range(1, 9):
+            d_fish[x - 1] = d_fish[x]
+        d_fish[8] = z
+        d_fish[6] += z
+    return sum(d_fish.values())
+
+#def lanternfish(l, days):
+#    for i in range(0, days):
+#        if 0 in l:
+#            for x in range(0, l.count(0)):
+#                l.append(9)
+#                l[l.index(0)] = 7
+#        l = [x-1 for x in l]
+#    return len(l)
+
+
+print('How many lantern fish would there be after 80 days? ',  count_fish(part1, 80))
+
+# PART II
+
+print('How many lantern fish would there be after 256 days? ',  count_fish(part2, 256))
+
+
+
+
+
+
+
+
+
+
 

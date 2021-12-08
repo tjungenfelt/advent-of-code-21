@@ -9,16 +9,16 @@ with fileinput.input(files=('input.txt')) as f:
 # PART I
 
 
-def increasing(depths_list):
-    inc_list = []
-    for i in range(0, len(depths_list)):
+def increasing(depths_l):
+    inc_l = []
+    for i in range(0, len(depths_l)):
         if i == 0:
-            inc_list.append(None)
-        elif depths_list[i] > depths_list[i - 1]:
-            inc_list.append(True)
+            inc_l.append(None)
+        elif depths_l[i] > depths_l[i - 1]:
+            inc_l.append(True)
         else:
-            inc_list.append(False)
-    return inc_list
+            inc_l.append(False)
+    return inc_l
 
 
 increase = increasing(depths).count(True)

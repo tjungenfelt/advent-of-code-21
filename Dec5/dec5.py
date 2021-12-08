@@ -50,20 +50,20 @@ for i in range(0, len(coord)):
                     d2[(k, j)] += 1
     else:
         if x[0] > x[1]:
-            r1 = list(range(x[0], x[1]-1, -1))
+            r1 = l(range(x[0], x[1]-1, -1))
             if y[0] > y[1]:
-                r2 = list(range(y[0], y[1]-1, -1))
+                r2 = l(range(y[0], y[1]-1, -1))
             else:
-                r2 = list(range(y[0], y[1]+1))
+                r2 = l(range(y[0], y[1]+1))
         elif y[0] > y[1]:
-            r2 = list(range(y[0], y[1]-1, -1))
-            r1 = list(range(x[0], x[1]+1))
+            r2 = l(range(y[0], y[1]-1, -1))
+            r1 = l(range(x[0], x[1]+1))
         else:
-            r1 = list(range(x[0], x[1]+1))
-            r2 = list(range(y[0], y[1]+1))
+            r1 = l(range(x[0], x[1]+1))
+            r2 = l(range(y[0], y[1]+1))
         for p in range(0, len(r1)):
             if (r2[p], r1[p]) not in d2:
-                 d2[(r2[p], r1[p])] = 1
+                d2[(r2[p], r1[p])] = 1
             else:
                 d2[(r2[p], r1[p])] += 1
 

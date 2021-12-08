@@ -5,7 +5,7 @@ with fileinput.input(files=('input.txt')) as f:
     for line in f:
         lines.append(line.strip())
 
-df_list = []
+df_l = []
 
 for i in range(0, len(lines)):
     if i == 0:
@@ -13,15 +13,15 @@ for i in range(0, len(lines)):
     elif lines[i] == '':
         pass
     else:
-        df_list.append([int(elem) for elem in lines[i].split()])
+        df_l.append([int(elem) for elem in lines[i].split()])
 
 bingo = []
 
-for i in range(0, len(df_list), 5):
-    list = []
+for i in range(0, len(df_l), 5):
+    l = []
     for j in range(i, i+5):
-        list.append(df_list[j])
-    bingo.append(list)
+        l.append(df_l[j])
+    bingo.append(l)
 
 marked = [[[False]*len(bingo[0][0]) for elem in bingo[0]] for row in bingo]
 
