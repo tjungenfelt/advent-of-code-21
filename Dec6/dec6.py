@@ -2,9 +2,9 @@ import fileinput
 
 lines = []
 with open('input.txt') as f:
-    initial_state = f.readline()
-    initial_state = initial_state.split(',')
-    initial_state = [int(x) for x in initial_state]
+    pos = f.readline()
+    pos = pos.split(',')
+    pos = [int(x) for x in pos]
     
 # PART I
 
@@ -12,11 +12,11 @@ d = dict()
 for x in range(0, 9):
     d[x] = 0
 
-for i in range(0, len(initial_state)):
-    if initial_state[i] not in d:
-        d[initial_state[i]] = 1
+for i in range(0, len(pos)):
+    if pos[i] not in d:
+        d[pos[i]] = 1
     else:
-        d[initial_state[i]] += 1
+        d[pos[i]] += 1
 
 part1 = d.copy()
 part2 = d.copy()
