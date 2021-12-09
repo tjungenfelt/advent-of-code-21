@@ -104,17 +104,4 @@ for lp in low_points:
     basins.append(len(find_neigh(lp)))
 
 basins = sorted(basins, reverse=True)
-
 print(basins[0]*basins[1]*basins[2])
-
-
-
-
-
-
-
-
-
-
-
-
