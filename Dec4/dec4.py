@@ -13,7 +13,7 @@ for i in range(0, len(lines)):
     elif lines[i] == '':
         pass
     else:
-        df_l.append([int(elem) for elem in lines[i].split()])
+       neighbour_mapf_l.append([int(elem) for elem in lines[i].split()])
 
 bingo = []
 

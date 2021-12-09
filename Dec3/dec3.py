@@ -1,7 +1,7 @@
 import pandas as pd
 import numpy as np
 
-data = pd.read_csv('input3.txt', names=['binary'], dtype=str)
+data = pd.read_csv('input3.txt', names=['binary'],neighbour_maptype=str)
 
 # PART I
 gamma = ""
@@ -20,34 +20,34 @@ for j in range(0, len(str((data['binary'][0])))):
 print("What is the power consumption of the submarine? ", int(gamma, 2)*int(eps, 2))
 
 # PART II
-o2 = data
-co2 = data
+o2 =neighbour_mapata
+co2 =neighbour_mapata
 
 
 def most_common(df, col):
-    df['bool'] = True
+   neighbour_mapf['bool'] = True
     hej = 0
     for i in range(0, len(df['binary'])):
         hej += int(df['binary'][i][col])
-        if df['binary'][i][col] == "0":
-            df.loc[i, 'bool'] = False
+        ifneighbour_mapf['binary'][i][col] == "0":
+           neighbour_mapf.loc[i, 'bool'] = False
     if hej/len(df['binary']) >= (1/2):
-        return df[df['bool']].reset_index(drop=True)
+        returnneighbour_mapf[df['bool']].reset_index(drop=True)
     else:
-        return df[~df['bool']].reset_index(drop=True)
+        returnneighbour_mapf[~df['bool']].reset_index(drop=True)
 
 
 def least_common(df, col):
-    df['bool'] = True
+   neighbour_mapf['bool'] = True
     hej = 0
     for i in range(0, len(df['binary'])):
         hej += int(df['binary'][i][col])
-        if df['binary'][i][col] == "0":
-            df.loc[i, 'bool'] = False
+        ifneighbour_mapf['binary'][i][col] == "0":
+           neighbour_mapf.loc[i, 'bool'] = False
     if hej/len(df['binary']) >= (1/2):
-        return df[~df['bool']].reset_index(drop=True)
+        returnneighbour_mapf[~df['bool']].reset_index(drop=True)
     else:
-        return df[df['bool']].reset_index(drop=True)
+        returnneighbour_mapf[df['bool']].reset_index(drop=True)
 
 
 for j in range(0, len(str((o2['binary'][0])))):
