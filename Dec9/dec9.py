@@ -8,86 +8,42 @@ with fileinput.input(files=('input.txt')) as f:
 
 height = []
 for i in lines:
-    height.append([int(x) for x in i ])
+    height.append([int(x) for x in i])
 final = 0
 
-#PART I
+# PART I
 low_points = []
+
+def neighbors(row_number, column_number):
+    n_list = []
+    n_set = set()
+    for j in range(column_number - 1, column_number + 2):
+        for i in range(row_number - 1, row_number + 2):
+            if i == row_number and j == column_number:
+                pass
+            elif (0 <= i < len(height)) and (0 <= j < len(height[0])) and not ((abs(i-row_number) == 1) and (abs(j-column_number) == 1)):
+                n_list.append(height[i][j])
+                n_set.add((i, j))
+    return n_list, n_set
+
+
+neighbour_map = dict()
 
 for i in range(0, len(height)):
     for j in range(0, len(height[0])):
-        if i == 0:
-            if j == 0:
-                n = [height[i][j + 1], height[i + 1][j]]
-            elif j == len(height[0])-1:
-                n = [height[i][j - 1], height[i + 1][j]]
-            else:
-                n = [height[i][j + 1], height[i][j - 1], height[i + 1][j]]
-        elif j == 0:
-            if i == len(height)-1:
-                n = [height[i][j + 1], height[i - 1][j]]
-            else:
-                n = [height[i][j + 1], height[i - 1][j], height[i + 1][j]]
-        elif i == len(height)-1:
-            if j == len(height[0])-1:
-                n = [height[i][j - 1], height[i - 1][j]]
-            else:
-                n = [height[i][j + 1], height[i][j - 1], height[i - 1][j]]
-        elif j == len(height[0])-1:
-            n = [height[i + 1][j], height[i][j - 1], height[i - 1][j]]
-        else:
-            n = [height[i + 1][j], height[i][j - 1], height[i - 1][j], height[i][j + 1]]
-        bool = []
-        for num in n:
-            if height[i][j] < num:
-                bool.append(True)
-            else:
-                bool.append(False)
-        if sum(bool) == len(bool):
+        [neigh, neigh_set] = neighbors(i, j)
+        neighbour_map[(i, j)] = neigh_set
+        lower = 0
+        for n in neigh:
+            if height[i][j] < n:
+                lower += 1
+        if lower == len(neigh):
             low_points.append((i, j))
             final += height[i][j] + 1
 
-print(final)
+print('P1: The sum of the risk levels of all low points on your heightmap: ', final)
 
 # PART II
-
-neighbour_map = dict()
-basin = 0
-l = set()
-
-for i in range(0, len(height)):
-    for j in range(0, len(height[0])):
-        if i == 0:
-            if j == 0:
-                neighbour_map[(i, j)] = {(i, j + 1), (i + 1,j)}
-            elif j == len(height[0])-1:
-                neighbour_map[(i, j)] = {(i, j - 1), (i + 1, j)}
-            else:
-                neighbour_map[(i, j)] = {(i, j + 1), (i, j - 1), (i + 1, j)}
-        elif j == 0:
-            if i == len(height)-1:
-                neighbour_map[(i, j)] = {(i, j + 1), (i - 1, j)}
-            else:
-                neighbour_map[(i, j)] = {(i, j + 1), (i - 1, j), (i + 1, j)}
-        elif i == len(height)-1:
-            if j == len(height[0])-1:
-                neighbour_map[(i, j)] = {(i, j - 1), (i - 1, j)}
-            else:
-                neighbour_map[(i, j)] = {(i, j + 1), (i, j - 1), (i - 1, j)}
-        elif j == len(height[0])-1:
-            neighbour_map[(i, j)] = {(i + 1, j), (i, j - 1), (i - 1, j)}
-        else:
-            neighbour_map[(i, j)] = {(i + 1, j), (i, j - 1), (i - 1, j), (i, j + 1)}
-        if height[i][j] == 9:
-            neighbour_map[(i, j)].clear()
-            l.add((i, j))
-
-
-for i in range(0, len(height)):
-    for j in range(0, len(height[0])):
-        neighbour_map[(i, j)] = neighbour_map[(i, j)] - l
-
-#print(d)
 
 
 def find_neigh(point):
@@ -98,10 +54,11 @@ def find_neigh(point):
             points.update(find_neigh(n))
     return points
 
+
 basins = []
 
 for lp in low_points:
     basins.append(len(find_neigh(lp)))
 
 basins = sorted(basins, reverse=True)
-print(basins[0]*basins[1]*basins[2])
+print('P2: The product of the sizes of the three largest basins: ', basins[0] * basins[1] * basins[2])
