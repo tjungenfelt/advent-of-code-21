@@ -23,4 +23,4 @@ for i in r:
     for p in range(0,len(pos)):
         p2[i] += (1+abs(i-pos[p]))*abs(i-pos[p])/2
 
-print(min(p2))
+print(int(min(p2)))

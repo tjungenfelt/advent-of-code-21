@@ -4,7 +4,7 @@ import fileinput
 depths = []
 with fileinput.input(files=('input.txt')) as f:
     for line in f:
-       neighbour_mapepths.append(int(line))
+        depths.append(int(line))
 
 # PART I
 
@@ -14,7 +14,7 @@ def increasing(depths_l):
     for i in range(0, len(depths_l)):
         if i == 0:
             inc_l.append(None)
-        elifneighbour_mapepths_l[i] >neighbour_mapepths_l[i - 1]:
+        elif depths_l[i] > depths_l[i - 1]:
             inc_l.append(True)
         else:
             inc_l.append(False)
