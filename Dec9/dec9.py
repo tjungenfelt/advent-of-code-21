@@ -1,5 +1,4 @@
 import fileinput
-from itertools import islice
 
 lines = []
 with fileinput.input(files=('input.txt')) as f:
