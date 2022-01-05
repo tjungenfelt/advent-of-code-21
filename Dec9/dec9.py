@@ -10,6 +10,7 @@ for i in lines:
     height.append([int(x) for x in i])
 final = 0
 
+
 # PART I
 low_points = []
 
